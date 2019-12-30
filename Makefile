@@ -1,5 +1,5 @@
 test:
-		vendor/phpunit/phpunit/phpunit
+		composer run-script phpunit tests
 install:
 		composer install
 run:
