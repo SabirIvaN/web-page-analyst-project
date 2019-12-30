@@ -1,5 +1,5 @@
 test:
-		composer run-script phpunit tests
+		phpunit
 install:
 		composer install
 run:
