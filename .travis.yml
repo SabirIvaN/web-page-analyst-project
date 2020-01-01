@@ -3,3 +3,12 @@ language:
 
 php:
   - "7.4"
+
+install:
+  - make install
+
+script:
+  - make lint
+  - make test
+  - make run
+  - make logs
