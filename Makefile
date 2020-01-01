@@ -1,11 +1,10 @@
 install:
-		composer install
-test:
-		composer run-script phpunit tests
+	composer install
 lint:
-        composer run-script phpcs -- --standard=PSR12 src bin tests
+	composer run-script phpcs -- --standard=PSR12 app tests
+test:
+	composer run-script phpunit app tests
 run:
-		php -S localhost:8000 -t public
+	php -S localhost:8000 -t public
 logs:
-		tail -f storage/logs/lumen.log
-
+	tail -f storage/logs/lumen.log
