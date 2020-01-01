@@ -7,9 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-abstract class Job implements ShouldQueue
-{
-    /*
+/*
     |--------------------------------------------------------------------------
     | Queueable Jobs
     |--------------------------------------------------------------------------
@@ -20,5 +18,9 @@ abstract class Job implements ShouldQueue
     |
     */
 
-    use InteractsWithQueue, Queueable, SerializesModels;
+abstract class Job implements ShouldQueue
+{
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 }
