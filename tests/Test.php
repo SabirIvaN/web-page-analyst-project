@@ -11,13 +11,9 @@ class Test extends TestCase
      * @return void
      */
 
-    public function testMainPage () {
+    public function testMainPage ()
+    {
         $this->call('GET', route('domains.main'));
         $this->assertResponseOk();
-    }
-
-    public function testDatabase () {
-        $parameteres = ['name' => 'https://yandex.ru'];
-        $this->seeInDatabase('domains', $parameteres);
     }
 }
