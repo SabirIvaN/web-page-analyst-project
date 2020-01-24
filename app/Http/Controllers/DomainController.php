@@ -8,12 +8,12 @@ use Laravel\Lumen\Routing\Controller as BaseController;
 
 class DomainController extends BaseController
 {
-    public function domainAnalyser()
+    public function domainsAnalyser ()
     {
         return view('domains.analyser');
     }
 
-    public function domainHistory()
+    public function domainsHistory ()
     {
         return view('domains.history');
     }

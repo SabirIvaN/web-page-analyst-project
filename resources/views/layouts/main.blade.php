@@ -19,7 +19,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item @yield('linkHome')">
-                            <a class="nav-link" href="/home">Home</a>
+                            <a class="nav-link" href="/">Home</a>
                         </li>
                         <li class="nav-item @yield('linkHistory')">
                             <a class="nav-link" href="/history">History</a>

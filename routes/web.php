@@ -1,5 +1,7 @@
 <?php
 
+use Laravel\Lumen\Routing\Router;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -11,12 +13,10 @@
 |
 */
 
-$router->get('/', ['as' => 'domains.main', 'uses' => 'DomainController@domainAnalyser']);
-
-$router->get('/home', ['as' => 'domains.analyser', 'uses' => 'DomainController@domainAnalyser']);
+$router->get('/', ['as' => 'domains.analyser', 'uses' => 'DomainController@domainsAnalyser']);
 
 $router->get('domains/{id}', ['as' => 'domains.table', 'uses' => 'DomainController@showTable']);
 
 $router->post('/domains', ['as' => 'domains.save', 'uses' =>'DomainController@sendData']);
 
-$router->get('/history', ['as' => 'domains.history', 'uses' => 'DomainController@domainHistory']);
+$router->get('/history', ['as' => 'domains.history', 'uses' => 'DomainController@domainsHistory']);
