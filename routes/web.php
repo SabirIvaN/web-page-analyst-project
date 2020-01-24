@@ -11,12 +11,12 @@
 |
 */
 
-/*
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
-*/
+$router->get('/', ['as' => 'domains.main', 'uses' => 'DomainController@domainAnalyser']);
 
-$router->get('/', function () {
-    return view('main');
-});
+$router->get('/home', ['as' => 'domains.analyser', 'uses' => 'DomainController@domainAnalyser']);
+
+$router->get('domains/{id}', ['as' => 'domains.table', 'uses' => 'DomainController@showTable']);
+
+$router->post('/domains', ['as' => 'domains.save', 'uses' =>'DomainController@sendData']);
+
+$router->get('/history', ['as' => 'domains.history', 'uses' => 'DomainController@domainHistory']);
