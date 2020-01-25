@@ -11,7 +11,7 @@
 |
 */
 
-$router->get('/', ['as' => 'domains.analyser', 'uses' => 'DomainController@domainsAnalyser']);
+$router->get('/', ['as' => 'domains.main', 'uses' => 'DomainController@domainsAnalyser']);
 
 $router->get('domains/{id}', ['as' => 'domains.table', 'uses' => 'DomainController@showTable']);
 
