@@ -27,11 +27,14 @@
                     </ul>
                 </div>
             </nav>
-            @show
         </header>
 
         <main>
-            @yield('content')
+            <div class="content">
+                @yield('content')
+            </div>
+
+            @show
         </main>
 
         <footer>

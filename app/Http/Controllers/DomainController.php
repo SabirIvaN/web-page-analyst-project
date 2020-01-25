@@ -15,7 +15,8 @@ class DomainController extends BaseController
 
     public function domainsHistory ()
     {
-        return view('domains.history');
+        $domains = DB::table('domains')->paginate(10);
+        return view('domains.history', ['domains' => $domains]);
     }
 
     public function showTable($id)

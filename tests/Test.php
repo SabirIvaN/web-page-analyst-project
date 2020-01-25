@@ -18,6 +18,7 @@ class Test extends TestCase
     }
 
     public function testDatabase () {
-        $this->seeInDatabase('domains', ['id' => 1]);
+        $response = $this->call('GET', '/domains');
+        $this->assertEquals(200, $response->status());
     }
 }
