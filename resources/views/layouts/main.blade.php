@@ -22,7 +22,7 @@
                             <a class="nav-link" href="/">Home</a>
                         </li>
                         <li class="nav-item @yield('linkHistory')">
-                            <a class="nav-link" href="/history">History</a>
+                            <a class="nav-link" href="{{ route('domains.history') }}">History</a>
                         </li>
                     </ul>
                 </div>
