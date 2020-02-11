@@ -2,8 +2,8 @@
 
 @section('title', 'Domain')
 
-@section('linkHome', 'active')
-@section('linkHistory', '')
+@section('linkHome', '')
+@section('linkHistory', 'active')
 
 @section('navbar')
     @parent
@@ -18,6 +18,9 @@
           <th scope="col">Created at</th>
           <th scope="col">Content length</th>
           <th scope="col">Response code</th>
+          <th scope="col">Tag of h1</th>
+          <th scope="col">Tag of meta with keywords</th>
+          <th scope="col">Tag of meta with description</th>
         </tr>
     </thead>
     <tbody>
@@ -27,6 +30,9 @@
           <td>{{ $domain->updated_at }}</td>
           <td>{{ $domain->content_length }}</td>
           <td>{{ $domain->response_code }}</td>
+          <td>{{ $domain->h1 }}</td>
+          <td>{{ $domain->meta_keywords }}</td>
+          <td>{{ $domain->meta_description }}</td>
         </tr>
     </tbody>
 </table>

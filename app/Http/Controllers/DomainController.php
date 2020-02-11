@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DiDom\Document;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -36,6 +37,26 @@ class DomainController extends BaseController
         $responseCode = $response->getStatusCode();
         $body = $response->getBody();
 
+        $document = new Document((String) $body);
+        if ($document->has('h1')) {
+            $elementH1 = $document->first('h1')->text();
+        } else {
+            $elementH1 = 'nothing';
+        }
+        if ($document->has("meta[name='keywords']")) {
+            $elementMetaKeywords = $document->first("meta[name='keywords']");
+            $contentMetaKeywords = $elementMetaKeywords->getAttribute('content');
+        } else {
+            $contentMetaKeywords = 'nothing';
+        }
+        if ($document->has("meta[name='description']")) {
+            $elementMetaDescription = $document->first("meta[name='description']");
+            $contentMetaDescription = $elementMetaDescription->getAttribute('content');
+        } else {
+            $contentMetaDescription = 'nothing';
+        }
+
+
         $currentDateTime = date('d/M/Y H:i:s');
         $id = DB::table('domains')->insertGetId([
             'name' => $url,
@@ -43,7 +64,10 @@ class DomainController extends BaseController
             'created_at' => $currentDateTime,
             'content_length' => $contentLength,
             'response_code' => $responseCode,
-            'body' => $body
+            'body' => $body,
+            'h1' => $elementH1,
+            'meta_keywords' => $contentMetaKeywords,
+            'meta_description' => $contentMetaDescription
         ]);
         return redirect()->route('domains.table', ['id' => $id]);
     }
