@@ -37,7 +37,7 @@ class DomainController extends BaseController
         $responseCode = $response->getStatusCode();
         $body = $response->getBody();
 
-        $document = new Document((String) $body);
+        $document = new Document((string) $body);
         if ($document->has('h1')) {
             $elementH1 = $document->first('h1')->text();
         } else {
