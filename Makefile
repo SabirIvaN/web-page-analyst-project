@@ -1,10 +1,10 @@
 install:
 	composer install
 lint:
-	composer run-script phpcs -- --standard=PSR12 app
+	composer run-script phpcs -- --standard=PSR12 app bootstrap config
 test:
-	composer run-script phpunit tests
+	phpunit
 run:
 	php -S localhost:8000 -t public
-migrate:
-	php artisan migrate
+logs:
+	tail -f storage/logs/lumen.log

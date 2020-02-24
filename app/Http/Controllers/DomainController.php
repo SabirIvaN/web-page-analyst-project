@@ -6,6 +6,7 @@ use DiDom\Document;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
 class DomainController extends BaseController
@@ -30,6 +31,13 @@ class DomainController extends BaseController
     public function sendData(Request $request)
     {
         $url = $request->input('urlSiteInputing');
+
+        $validator = Validator::make($request->all(), [
+            'urlSiteInputing' => 'required|url'
+        ]);
+        if ($validator->fails()) {
+            return redirect()->route('domains.main');
+        }
 
         $client = new Client();
         $response = $client->request('GET', $url);

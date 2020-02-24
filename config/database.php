@@ -1,6 +1,6 @@
 <?php
 
-$herokuDb = parse_url(env('DATABASE_URL', "postgres://nskjbafauamcqz:a269943b93bd0f932287c409f518e51a8747f6e050f23b6e476e686855473c49@ec2-54-246-98-119.eu-west-1.compute.amazonaws.com:5432/d2k2hq78lht2vn"));
+$herokuDb = parse_url(env('DATABASE_URL', 'postgres://nskjbafauamcqz:a269943b93bd0f932287c409f518e51a8747f6e050f23b6e476e686855473c49@ec2-54-246-98-119.eu-west-1.compute.amazonaws.com:5432/d2k2hq78lht2vn'));
 
 return [
 
@@ -37,7 +37,7 @@ return [
 
         'sqlite' => [
             'driver' => 'sqlite',
-            'database' => env('DB_DATABASE', database_path('database.sqlite')),
+            'database' => dirname(__DIR__) . '/database/database.sqlite',
             'prefix' => env('DB_PREFIX', ''),
         ],
 
