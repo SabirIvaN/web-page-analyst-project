@@ -69,6 +69,7 @@ class DomainController extends BaseController
             'meta_keywords' => $contentMetaKeywords,
             'meta_description' => $contentMetaDescription
         ]);
+
         return redirect()->route('domains.table', ['id' => $id]);
     }
 }
