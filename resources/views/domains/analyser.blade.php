@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-    <div class="jumbotron">
+    <div class="jumbotron container mt-4">
         <h1 class="display-4">Hello!</h1>
         <p class="lead">This is an SEO site validator. It will help you find out the mistakes made when creating a site and raise your site in the ranking.</p>
         <form class="form-row align-items-end" action="/domains" method="POST">

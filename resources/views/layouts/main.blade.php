@@ -30,7 +30,7 @@
         </header>
 
         <main>
-            <div class="container mt-4">
+            <div>
                 @yield('content')
             </div>
 
