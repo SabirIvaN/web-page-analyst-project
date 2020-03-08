@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     </head>
     <body>
-        <header>
+        <header class="page-header">
             @section('navbar')
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <a class="navbar-brand" href="/">Web page analyst</a>
@@ -30,7 +30,7 @@
         </header>
 
         <main>
-            <div class="content">
+            <div class="container mt-4">
                 @yield('content')
             </div>
 
