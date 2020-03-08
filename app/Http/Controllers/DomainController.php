@@ -31,20 +31,15 @@ class DomainController extends BaseController
     public function sendData(Request $request)
     {
         $url = $request->input('urlSiteInputing');
-
-        $validator = Validator::make($request->all(), [
-            'urlSiteInputing' => 'required|url'
-        ]);
+        $validator = Validator::make($request->all(), ['urlSiteInputing' => 'required|url']);
         if ($validator->fails()) {
             return redirect()->route('domains.main');
         }
-
         $client = new Client();
         $response = $client->request('GET', $url);
         $contentLength = $response->getBody()->getSize();
         $responseCode = $response->getStatusCode();
         $body = $response->getBody();
-
         $document = new Document((string) $body);
         if ($document->has('h1')) {
             $elementH1 = $document->first('h1')->text();
@@ -63,8 +58,6 @@ class DomainController extends BaseController
         } else {
             $contentMetaDescription = 'nothing';
         }
-
-
         $currentDateTime = date('d/M/Y H:i:s');
         $id = DB::table('domains')->insertGetId([
             'name' => $url,
@@ -77,7 +70,6 @@ class DomainController extends BaseController
             'meta_keywords' => $contentMetaKeywords,
             'meta_description' => $contentMetaDescription
         ]);
-
         return redirect()->route('domains.table', ['id' => $id]);
     }
 }
