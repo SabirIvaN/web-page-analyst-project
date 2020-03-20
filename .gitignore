@@ -2,4 +2,5 @@ vendor
 .idea
 .DS_Store
 .env
+database.sqlite
 .phpunit.result.cache

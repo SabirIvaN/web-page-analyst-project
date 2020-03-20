@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Domain;
 use DiDom\Document;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -11,12 +12,13 @@ use Laravel\Lumen\Routing\Controller as BaseController;
 
 class DomainController extends BaseController
 {
-    public function domainsAnalyser()
+    public function showAnalyser()
     {
-        return view('domains.analyser');
+        $domains = Domain::all();
+        return view('domains.analyser', ['domains' => $domains]);
     }
 
-    public function domainsHistory()
+    public function showHistory()
     {
         $domains = DB::table('domains')->paginate(10);
         return view('domains.history', ['domains' => $domains]);

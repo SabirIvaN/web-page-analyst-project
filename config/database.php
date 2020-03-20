@@ -35,10 +35,16 @@ return [
 
     'connections' => [
 
+        'sqlite_testing' => [
+            'driver' => 'sqlite',
+            'database' => ':memory:',
+            'prefix' => '',
+        ],
+
         'sqlite' => [
             'driver' => 'sqlite',
             'database' => dirname(__DIR__) . '/database/database.sqlite',
-            'prefix' => env('DB_PREFIX', ''),
+            'prefix' => '',
         ],
 
         'pgsql' => [

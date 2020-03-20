@@ -15,6 +15,13 @@ class CreateTableDomains extends Migration
     {
         Schema::create('domains', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name')->nullable();
+            $table->text('content_length')->nullable();
+            $table->text('response_code')->nullable();
+            $table->text('body')->nullable();
+            $table->text('h1')->nullable();
+            $table->text('meta_keywords')->nullable();
+            $table->text('meta_description')->nullable();
             $table->timestamps();
         });
     }

@@ -1,9 +1,9 @@
 install:
 	composer install
 lint:
-	composer run-script phpcs -- --standard=PSR12 app
+	composer run-script phpcs -- --standard=PSR12 app tests
 test:
-	phpunit
+	composer run-script phpunit tests
 run:
 	php -S localhost:8000 -t public
 logs:
