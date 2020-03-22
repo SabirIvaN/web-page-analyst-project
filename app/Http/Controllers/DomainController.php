@@ -42,9 +42,15 @@ class DomainController extends BaseController
         $responseCode = $response->getStatusCode();
         $body = $response->getBody();
         $document = new Document((string) $body);
-        $elementH1 = ($document->has('h1')) ? $document->first('h1')->text() : 'nothing';
-        $elementMetaKeywords = ($document->has("meta[name='keywords']")) ? $document->first("meta[name='keywords']")->getAttribute('content') : 'nothing';
-        $elementMetaDescription = ($document->has("meta[name='description']")) ? $document->first("meta[name='description']")->getAttribute('content') : 'nothing';
+        $elementH1 = ($document->has('h1')) ?
+            $document->first('h1')->text() :
+            'nothing';
+        $elementMetaKeywords = ($document->has("meta[name='keywords']")) ?
+            $document->first("meta[name='keywords']")->getAttribute('content') :
+            'nothing';
+        $elementMetaDescription = ($document->has("meta[name='description']")) ?
+            $document->first("meta[name='description']")->getAttribute('content') :
+            'nothing';
         $currentDateTime = date('d/M/Y H:i:s');
         $id = DB::table('domains')->insertGetId([
             'name' => $url,
