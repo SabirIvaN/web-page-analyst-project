@@ -38,8 +38,6 @@ class DomainController extends BaseController
         }
         $client = new Client();
         $response = $client->request('GET', $url);
-        $contentLength = $response->getBody()->getSize();
-        $responseCode = $response->getStatusCode();
         $body = $response->getBody();
         $document = new Document((string) $body);
         $elementH1 = ($document->has('h1')) ?
@@ -51,13 +49,12 @@ class DomainController extends BaseController
         $elementMetaDescription = ($document->has("meta[name='description']")) ?
             $document->first("meta[name='description']")->getAttribute('content') :
             'nothing';
-        $currentDateTime = date('d/M/Y H:i:s');
         $id = DB::table('domains')->insertGetId([
             'name' => $url,
-            'updated_at' => $currentDateTime,
-            'created_at' => $currentDateTime,
-            'content_length' => $contentLength,
-            'response_code' => $responseCode,
+            'updated_at' => date('d/M/Y H:i:s'),
+            'created_at' => date('d/M/Y H:i:s'),
+            'content_length' => $response->getBody()->getSize(),
+            'response_code' => $response->getStatusCode(),
             'body' => $body,
             'h1' => $elementH1,
             'meta_keywords' => $elementMetaKeywords,
