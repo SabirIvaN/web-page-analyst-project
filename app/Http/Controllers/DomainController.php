@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Domain;
-use DiDom\Document;
-use GuzzleHttp\Client;
+use App\Helpers\UrlHandler;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -36,29 +34,18 @@ class DomainController extends BaseController
         if ($validator->fails()) {
             return redirect()->route('domains.analyser');
         }
-        $client = new Client();
-        $response = $client->request('GET', $url);
-        $body = $response->getBody();
-        $document = new Document((string) $body);
-        $elementH1 = ($document->has('h1')) ?
-            $document->first('h1')->text() :
-            'nothing';
-        $elementMetaKeywords = ($document->has("meta[name='keywords']")) ?
-            $document->first("meta[name='keywords']")->getAttribute('content') :
-            'nothing';
-        $elementMetaDescription = ($document->has("meta[name='description']")) ?
-            $document->first("meta[name='description']")->getAttribute('content') :
-            'nothing';
+        $urlHandler = new UrlHandler();
+        $domain = $urlHandler->getUrlInformation($url);
         $id = DB::table('domains')->insertGetId([
             'name' => $url,
-            'updated_at' => date('d/M/Y H:i:s'),
-            'created_at' => date('d/M/Y H:i:s'),
-            'content_length' => $response->getBody()->getSize(),
-            'response_code' => $response->getStatusCode(),
-            'body' => $body,
-            'h1' => $elementH1,
-            'meta_keywords' => $elementMetaKeywords,
-            'meta_description' => $elementMetaDescription
+            'updated_at' => $domain['created_at'],
+            'created_at' => $domain['updated_at'],
+            'content_length' => $domain['content_length'],
+            'response_code' => $domain['response_code'],
+            'body' => $domain['body'],
+            'h1' => $domain['h1'],
+            'meta_keywords' => $domain['meta_keywords'],
+            'meta_description' => $domain['meta_description']
         ]);
         return redirect()->route('domains.table', ['id' => $id]);
     }
