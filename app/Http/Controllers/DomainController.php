@@ -14,8 +14,7 @@ class DomainController extends BaseController
 {
     public function showAnalyser()
     {
-        $domains = Domain::all();
-        return view('domains.analyser', ['domains' => $domains]);
+        return view('domains.analyser');
     }
 
     public function showHistory()
@@ -35,7 +34,7 @@ class DomainController extends BaseController
         $url = $request->input('urlSiteInputing');
         $validator = Validator::make($request->all(), ['urlSiteInputing' => 'required|url']);
         if ($validator->fails()) {
-            return redirect()->route('domains.main');
+            return redirect()->route('domains.analyser');
         }
         $client = new Client();
         $response = $client->request('GET', $url);
@@ -43,23 +42,9 @@ class DomainController extends BaseController
         $responseCode = $response->getStatusCode();
         $body = $response->getBody();
         $document = new Document((string) $body);
-        if ($document->has('h1')) {
-            $elementH1 = $document->first('h1')->text();
-        } else {
-            $elementH1 = 'nothing';
-        }
-        if ($document->has("meta[name='keywords']")) {
-            $elementMetaKeywords = $document->first("meta[name='keywords']");
-            $contentMetaKeywords = $elementMetaKeywords->getAttribute('content');
-        } else {
-            $contentMetaKeywords = 'nothing';
-        }
-        if ($document->has("meta[name='description']")) {
-            $elementMetaDescription = $document->first("meta[name='description']");
-            $contentMetaDescription = $elementMetaDescription->getAttribute('content');
-        } else {
-            $contentMetaDescription = 'nothing';
-        }
+        $elementH1 = ($document->has('h1')) ? $document->first('h1')->text() : 'nothing';
+        $elementMetaKeywords = ($document->has("meta[name='keywords']")) ? $document->first("meta[name='keywords']")->getAttribute('content') : 'nothing';
+        $elementMetaDescription = ($document->has("meta[name='description']")) ? $document->first("meta[name='description']")->getAttribute('content') : 'nothing';
         $currentDateTime = date('d/M/Y H:i:s');
         $id = DB::table('domains')->insertGetId([
             'name' => $url,
@@ -69,8 +54,8 @@ class DomainController extends BaseController
             'response_code' => $responseCode,
             'body' => $body,
             'h1' => $elementH1,
-            'meta_keywords' => $contentMetaKeywords,
-            'meta_description' => $contentMetaDescription
+            'meta_keywords' => $elementMetaKeywords,
+            'meta_description' => $elementMetaDescription
         ]);
         return redirect()->route('domains.table', ['id' => $id]);
     }
