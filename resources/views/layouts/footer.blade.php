@@ -1,6 +1,6 @@
         <footer class="page-footer mt-auto">
             <nav class="navbar navbar-expand-lg fixed-bottom container-fluid bg-light pt-2 pb-2">
-                <span class="text-muted mx-auto align-middle">Produced <a href="#">Ivan Sabirov</a> for training at <a href="#">Hexlet</a></span>
+                <span class="text-muted mx-auto align-middle">Produced <a href="https://github.com/SabirIvan">Ivan Sabirov</a> for training at <a href="https://ru.hexlet.io">Hexlet</a></span>
             </nav>
         </footer>
 
