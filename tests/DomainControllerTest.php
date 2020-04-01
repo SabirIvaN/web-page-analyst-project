@@ -42,6 +42,8 @@ class DomainControllerTest extends TestCase
         $responseCode = 200;
         DB::table('domains')->insert([
             'name' => $filePath,
+            'updated_at' => $currentDateTime,
+            'created_at' => $currentDateTime,
             'content_length' => $contentLength,
             'response_code' => $responseCode,
             'body' => $body,
@@ -51,6 +53,8 @@ class DomainControllerTest extends TestCase
         ]);
         $this->seeInDatabase('domains', [
             'name' => $filePath,
+            'updated_at' => $currentDateTime,
+            'created_at' => $currentDateTime,
             'content_length' => $contentLength,
             'response_code' => $responseCode,
             'body' => $body,
