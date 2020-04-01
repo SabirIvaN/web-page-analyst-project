@@ -21,12 +21,12 @@ class DomainControllerTest extends TestCase
 
     public function testAnalyser()
     {
-        $this->get(route('domains.analyser'))->assertResponseOk();
+        $this->get(route('domains.index'))->assertResponseOk();
     }
 
     public function testHistory()
     {
-        $this->get(route('domains.history'))->assertResponseOk();
+        $this->get(route('domains.store'))->assertResponseOk();
     }
 
     public function testDatabase()
@@ -34,15 +34,9 @@ class DomainControllerTest extends TestCase
         $filePath = __DIR__ . DIRECTORY_SEPARATOR . 'fixtures' . DIRECTORY_SEPARATOR . 'test-page.html';
         $body = file_get_contents($filePath);
         $document = new Document($body);
-        if ($document->has('h1')) {
-            $elementH1 = $document->first('h1')->text();
-        }
-        if ($document->has("meta[name='keywords']")) {
-            $elementMetaKeywords = $document->first("meta[name='keywords']")->getAttribute('content');
-        }
-        if ($document->has("meta[name='description']")) {
-            $elementMetaDescription = $document->first("meta[name='description']")->getAttribute('content');
-        }
+        $elementH1 = $document->first('h1')->text();
+        $elementMetaKeywords = $document->first("meta[name='keywords']")->getAttribute('content');
+        $elementMetaDescription = $document->first("meta[name='description']")->getAttribute('content');
         $contentLength = strlen($body);
         $currentDateTime = date('d/M/Y H:i:s');
         $responseCode = 200;
