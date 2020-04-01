@@ -5,11 +5,11 @@ namespace App\Helpers;
 use DiDom\Document;
 use GuzzleHttp\Client;
 
-/**
- * Url handler
- */
 class UrlHandler
 {
+    /**
+     * get url handler
+     */
     public function getUrlInformation($url)
     {
         $client = new Client();
@@ -17,8 +17,6 @@ class UrlHandler
         $body = $response->getBody();
         $document = new Document((string) $body);
         $domain = [
-            'updated_at' => date('d/M/Y H:i:s'),
-            'created_at' => date('d/M/Y H:i:s'),
             'content_length' => $response->getBody()->getSize(),
             'response_code' => $response->getStatusCode(),
             'body' => $body,

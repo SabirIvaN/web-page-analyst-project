@@ -11,10 +11,10 @@
 |
 */
 
-$router->get('/', ['as' => 'domains.analyser', 'uses' => 'DomainController@showAnalyser']);
+$router->get('/', ['as' => 'domains.index', 'uses' => 'HomeController@index']);
 
-$router->get('domains/{id}', ['as' => 'domains.table', 'uses' => 'DomainController@showTable']);
+$router->get('domains/{id}', ['as' => 'domains.show', 'uses' => 'DomainController@show']);
 
-$router->get('/domains', ['as' => 'domains.history', 'uses' => 'DomainController@showHistory']);
+$router->get('/domains', ['as' => 'domains.store', 'uses' => 'DomainController@store']);
 
-$router->post('/domains', ['as' => 'domains.create', 'uses' =>'DomainController@sendData']);
+$router->post('/domains', ['as' => 'domains.create', 'uses' =>'DomainController@create']);

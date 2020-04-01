@@ -10,36 +10,31 @@ use Laravel\Lumen\Routing\Controller as BaseController;
 
 class DomainController extends BaseController
 {
-    public function showAnalyser()
-    {
-        return view('domains.analyser');
-    }
-
-    public function showHistory()
+    public function store()
     {
         $domains = DB::table('domains')->paginate(10);
-        return view('domains.history', ['domains' => $domains]);
+        return view('domains.store', ['domains' => $domains]);
     }
 
-    public function showTable($id)
+    public function show($id)
     {
         $domains = DB::table('domains')->where(['id' => $id])->get();
-        return view('domains.table', ['domain' => $domains->first()]);
+        return view('domains.show', ['domain' => $domains->first()]);
     }
 
-    public function sendData(Request $request)
+    public function create(Request $request)
     {
         $url = $request->input('urlSiteInputing');
         $validator = Validator::make($request->all(), ['urlSiteInputing' => 'required|url']);
         if ($validator->fails()) {
-            return redirect()->route('domains.analyser');
+            return redirect()->route('domains.index');
         }
         $urlHandler = new UrlHandler();
         $domain = $urlHandler->getUrlInformation($url);
         $id = DB::table('domains')->insertGetId([
             'name' => $url,
-            'updated_at' => $domain['created_at'],
-            'created_at' => $domain['updated_at'],
+            'updated_at' => date('d/M/Y H:i:s'),
+            'created_at' => date('d/M/Y H:i:s'),
             'content_length' => $domain['content_length'],
             'response_code' => $domain['response_code'],
             'body' => $domain['body'],
@@ -47,6 +42,6 @@ class DomainController extends BaseController
             'meta_keywords' => $domain['meta_keywords'],
             'meta_description' => $domain['meta_description']
         ]);
-        return redirect()->route('domains.table', ['id' => $id]);
+        return redirect()->route('domains.show', ['id' => $id]);
     }
 }
