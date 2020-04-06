@@ -18,11 +18,11 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
-                        <li class="nav-item @yield('linkHome')">
+                        <li class="nav-item">
                             <a class="nav-link" href="/">Home</a>
                         </li>
-                        <li class="nav-item @yield('linkHistory')">
-                            <a class="nav-link" href="{{ route('domains.store') }}">History</a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('domains.index') }}">History</a>
                         </li>
                     </ul>
                 </div>

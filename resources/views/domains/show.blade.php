@@ -2,9 +2,6 @@
 
 @section('title', 'Domain')
 
-@section('linkHome', '')
-@section('linkHistory', 'active')
-
 @section('navbar')
     @parent
 @endsection

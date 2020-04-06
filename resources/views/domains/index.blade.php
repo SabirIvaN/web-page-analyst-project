@@ -1,26 +1,39 @@
 @extends('layouts.main')
 
-@section('title', 'Main Page')
-
-@section('linkHome', 'active')
-@section('linkHistory', '')
+@section('title', 'History')
 
 @section('navbar')
     @parent
 @endsection
 
 @section('content')
-<div class="jumbotron container mt-4">
-    <h1 class="display-4">Hello!</h1>
-    <p class="lead">This is an SEO site validator. It will help you find out the mistakes made when creating a site and raise your site in the ranking.</p>
-    <form class="form-group align-items-end" action="/domains" method="POST">
-        <div class="form-group">
-            <label for="urlSiteInputing">Enter the site URL</label>
-            <div class="input-group w-100">
-                <input type="text" class="form-control mr-1 rounded" id="urlSiteInputing" name="urlSiteInputing" placeholder="URL site">
-                <button type="submit" id="urlSiteButton" class="btn btn-secondary">Submit</button>
-            </div>
-        </div>
-    </form>
+<div class="table-responsive">
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+              <th scope="col">URL</th>
+              <th scope="col">Updated at</th>
+              <th scope="col">Created at</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($domains as $domain)
+            <tr>
+              <td>
+                  <a href="{{ route('domains.show', ['id' => $domain->id]) }}">{{ $domain->name }}</a>
+              </td>
+              <td>{{ $domain->created_at }}</td>
+              <td>{{ $domain->updated_at }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+<div class="page-footer">
+    <nav>
+      <ul class="pagination justify-content-center fixed-bottom mb-5 pb-5">
+        {{ $domains->render() }}
+      </ul>
+    </nav>
 </div>
 @endsection

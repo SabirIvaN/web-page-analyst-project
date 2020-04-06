@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\UrlHandler;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -10,10 +11,15 @@ use Laravel\Lumen\Routing\Controller as BaseController;
 
 class DomainController extends BaseController
 {
-    public function store()
+    public function create()
+    {
+        return view('domains.create');
+    }
+
+    public function index()
     {
         $domains = DB::table('domains')->paginate(10);
-        return view('domains.store', ['domains' => $domains]);
+        return view('domains.index', ['domains' => $domains]);
     }
 
     public function show($id)
@@ -22,12 +28,12 @@ class DomainController extends BaseController
         return view('domains.show', ['domain' => $domains->first()]);
     }
 
-    public function create(Request $request)
+    public function store(Request $request)
     {
         $url = $request->input('urlSiteInputing');
         $validator = Validator::make($request->all(), ['urlSiteInputing' => 'required|url']);
         if ($validator->fails()) {
-            return redirect()->route('domains.index');
+            return redirect()->route('domains.create');
         }
         $urlHandler = new UrlHandler();
         $domain = $urlHandler->getUrlInformation($url);
