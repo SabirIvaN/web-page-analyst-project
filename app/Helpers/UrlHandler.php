@@ -10,10 +10,8 @@ class UrlHandler
     /**
      * get url handler
      */
-    public function getUrlInformation($url)
+    public function getUrlInformation($response)
     {
-        $client = new Client();
-        $response = $client->request('GET', $url);
         $body = $response->getBody();
         $document = new Document((string) $body);
         $domain = [

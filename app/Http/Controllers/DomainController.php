@@ -11,6 +11,13 @@ use Laravel\Lumen\Routing\Controller as BaseController;
 
 class DomainController extends BaseController
 {
+    protected $client;
+
+    public function __construct(Client $client)
+    {
+        $this->client = $client;
+    }
+
     public function create()
     {
         return view('domains.create');
@@ -35,8 +42,10 @@ class DomainController extends BaseController
         if ($validator->fails()) {
             return redirect()->route('domains.create');
         }
+        $client = new Client();
+        $response = $client->request('GET', $url);
         $urlHandler = new UrlHandler();
-        $domain = $urlHandler->getUrlInformation($url);
+        $domain = $urlHandler->getUrlInformation($response);
         $id = DB::table('domains')->insertGetId([
             'name' => $url,
             'updated_at' => date('d/M/Y H:i:s'),
