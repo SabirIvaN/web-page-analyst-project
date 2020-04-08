@@ -43,7 +43,7 @@ class DomainController extends BaseController
             return redirect()->route('domains.create');
         }
         $client = new Client();
-        $response = $client->request('GET', $url);
+        $response = $this->client->request('GET', $url);
         $urlHandler = new UrlHandler();
         $domain = $urlHandler->getUrlInformation($response);
         $id = DB::table('domains')->insertGetId([
