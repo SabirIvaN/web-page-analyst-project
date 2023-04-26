@@ -3,4 +3,4 @@
 
 ## Description
 
-SEO page analyzer allows you to find out the basic characteristics of websites
+SEO page analyzer allows you to find out the basic characteristics of websites.
