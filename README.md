@@ -3,6 +3,4 @@
 
 ## Description
 
-To view follow the link [https://php-project-lvl3.herokuapp.com].
-
 SEO page analyzer allows you to find out the basic characteristics of websites
